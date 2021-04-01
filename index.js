@@ -31,6 +31,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 client.connect(err => {
   console.log('connection err', err)
   const fruitsCollection = client.db("fruitVillage").collection("fruits");
+  const ordersCollection = client.db("fruitVillage").collection("orders");
   console.log('Database connected successfully.');
 
 
@@ -59,6 +60,17 @@ client.connect(err => {
      res.send(result.insertedCount > 0)
    })
  })
+
+
+ app.post('/addOrder', (req, res) => {
+  const order = req.body;
+  // console.log(product);
+  ordersCollection.insertOne(order)
+  .then(result => {
+    // console.log(result.insertedCount);
+    res.send(result.insertedCount > 0)
+  })
+})
 
 //  app.get('fruitDetail/:id', (req, res) => {
 //   fruitsCollection.find({_id: ObjectId(req.params.id)})

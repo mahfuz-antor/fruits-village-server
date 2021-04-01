@@ -51,6 +51,14 @@ client.connect(err => {
       })
     })
 
+    app.get('/orders', (req, res) => {
+      ordersCollection.find()
+      .toArray((err, order) => {
+        // console.log('From Database Images.', items);
+        res.send(order)
+      })
+    })
+
  app.post('/addFruit', (req, res) => {
    const newEvent = req.body;
   //  console.log('adding new event', newEvent);
@@ -87,7 +95,13 @@ client.connect(err => {
 //     res.send(fruit)
 //   })
 // })
- 
+ app.delete('/delete/:id', (req, res) =>{
+  fruitsCollection.deleteOne({_id: ObjectId(req.params.id)})
+  .then(  result =>{
+    // console.log(result);
+    res.send(result.deletedCount > 0);
+  })
+ })
 
 })
 

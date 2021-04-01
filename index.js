@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const MongoClient = require('mongodb').MongoClient;
+// const { ObjectId } = require('bson');
+const ObjectId = require('mongodb').ObjectId;
 
 require('dotenv').config();
 
@@ -40,6 +42,14 @@ client.connect(err => {
       })
     })
 
+    app.get('/fruitDetail', (req, res) => {
+      fruitsCollection.find()
+      .toArray((err, fruit) => {
+        // console.log('From Database Images.', items);
+        res.send(fruit)
+      })
+    })
+
  app.post('/addFruit', (req, res) => {
    const newEvent = req.body;
   //  console.log('adding new event', newEvent);
@@ -49,6 +59,23 @@ client.connect(err => {
      res.send(result.insertedCount > 0)
    })
  })
+
+//  app.get('fruitDetail/:id', (req, res) => {
+//   fruitsCollection.find({_id: ObjectId(req.params.id)})
+//   .toArray( (err, documents) =>{
+//     res.send(documents);
+//   })
+//  })
+
+//  app.get('/fruitDetail/:id', (req, res) => {
+//   const fruitDetail = req.body;
+//   fruitsCollection.find(fruitDetail)
+//   .toArray((err, fruit) => {
+//     // console.log('From Database Images.', items);
+//     res.send(fruit)
+//   })
+// })
+ 
 
 })
 

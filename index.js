@@ -43,7 +43,7 @@ client.connect(err => {
       })
     })
 
-    app.get('/fruitDetail', (req, res) => {
+    app.get('/orderDetails', (req, res) => {
       fruitsCollection.find()
       .toArray((err, fruit) => {
         // console.log('From Database Images.', items);

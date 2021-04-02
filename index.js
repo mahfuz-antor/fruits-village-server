@@ -52,7 +52,8 @@ client.connect(err => {
     })
 
     app.get('/orders', (req, res) => {
-      ordersCollection.find()
+      console.log(req.query.email);
+      ordersCollection.find({email: req.query.email})
       .toArray((err, order) => {
         // console.log('From Database Images.', items);
         res.send(order)

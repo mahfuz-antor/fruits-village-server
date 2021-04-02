@@ -35,86 +35,66 @@ client.connect(err => {
   console.log('Database connected successfully.');
 
 
-    app.get('/events', (req, res) => {
-      fruitsCollection.find()
+  app.get('/events', (req, res) => {
+    fruitsCollection.find()
       .toArray((err, items) => {
         // console.log('From Database Images.', items);
         res.send(items)
       })
-    })
+  })
 
-    app.get('/orderDetails', (req, res) => {
-      fruitsCollection.find()
+  app.get('/orderDetails', (req, res) => {
+    fruitsCollection.find()
       .toArray((err, fruit) => {
         // console.log('From Database Images.', items);
         res.send(fruit)
       })
-    })
+  })
 
-    app.get('/orders', (req, res) => {
-      console.log(req.query.email);
-      ordersCollection.find({email: req.query.email})
+  app.get('/orders', (req, res) => {
+    console.log(req.query.email);
+    ordersCollection.find({ email: req.query.email })
       .toArray((err, order) => {
         // console.log('From Database Images.', items);
         res.send(order)
       })
-    })
-
- app.post('/addFruit', (req, res) => {
-   const newEvent = req.body;
-  //  console.log('adding new event', newEvent);
-   fruitsCollection.insertOne(newEvent)
-   .then(result => {
-    //  console.log('event count', result.insertedCount);
-     res.send(result.insertedCount > 0)
-   })
- })
-
-
- app.post('/addOrder', (req, res) => {
-  const order = req.body;
-  // console.log(product);
-  ordersCollection.insertOne(order)
-  .then(result => {
-    // console.log(result.insertedCount);
-    res.send(result.insertedCount > 0)
   })
-})
 
-//  app.get('fruitDetail/:id', (req, res) => {
-//   fruitsCollection.find({_id: ObjectId(req.params.id)})
-//   .toArray( (err, documents) =>{
-//     res.send(documents);
-//   })
-//  })
-
-//  app.get('/fruitDetail/:id', (req, res) => {
-//   const fruitDetail = req.body;
-//   fruitsCollection.find(fruitDetail)
-//   .toArray((err, fruit) => {
-//     // console.log('From Database Images.', items);
-//     res.send(fruit)
-//   })
-// })
- app.delete('/delete/:id', (req, res) =>{
-  fruitsCollection.deleteOne({_id: ObjectId(req.params.id)})
-  .then(  result =>{
-    // console.log(result);
-    res.send(result.deletedCount > 0);
+  app.post('/addFruit', (req, res) => {
+    const newEvent = req.body;
+    //  console.log('adding new event', newEvent);
+    fruitsCollection.insertOne(newEvent)
+      .then(result => {
+        //  console.log('event count', result.insertedCount);
+        res.send(result.insertedCount > 0)
+      })
   })
- })
+
+
+  app.post('/addOrder', (req, res) => {
+    const order = req.body;
+    // console.log(product);
+    ordersCollection.insertOne(order)
+      .then(result => {
+        // console.log(result.insertedCount);
+        res.send(result.insertedCount > 0)
+      })
+  })
+
+  app.delete('/delete/:id', (req, res) => {
+    fruitsCollection.deleteOne({ _id: ObjectId(req.params.id) })
+      .then(result => {
+        // console.log(result);
+        res.send(result.deletedCount > 0);
+      })
+  })
 
 })
-
-
-
-
-
 
 
 
 app.get('/', (req, res) => {
-    res.send('Hello World! New Project.')
-  })
-  
-  app.listen(process.env.PORT || port)
+  res.send('Hello World! New Project.')
+})
+
+app.listen(process.env.PORT || port)

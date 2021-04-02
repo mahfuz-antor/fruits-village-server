@@ -4,7 +4,7 @@ I am trying to create my own field with React Route NodeJs MongoDB. It's full st
 
 # Here I am giving my assignment-10 link. You can easily see this site.
 
-It is my assignment-10 live site link [It is my another working link](https://cranky-knuth-c8f49d.netlify.app/).
+It is my assignment-10 live site link [It is my working link](https://full-stack-client-site.web.app/).
 
 # Are you interested to know more information about me?
 
